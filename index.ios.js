@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, AppRegistry, ScrollView, WebView} from 'react-native';
+import { StyleSheet, Text, View, Button, AppRegistry, ScrollView, WebView, Linking} from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import Settings from './src/settings/Settings.js';
@@ -38,11 +38,12 @@ class AwesomeProject extends React.Component{
     this.setState({authWindowOpen: true});
   }
 
+
   render() {
     if(this.state.authWindowOpen){
       return (
         <WebView
-          source={{uri: 'https://i.redd.it/ahaqcf64xd7z.jpg'}}
+          source={{uri: 'http://localhost:3000/auth/facebook'}}
           style={{marginTop: 20}}
         />
       );
