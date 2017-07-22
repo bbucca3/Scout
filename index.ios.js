@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, AppRegistry, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, Button, AppRegistry, ScrollView, WebView} from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import Settings from './src/settings/Settings.js';
@@ -18,7 +18,8 @@ class AwesomeProject extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      userData: {}
+      userData: {},
+      authWindowOpen: false
     };
   }
 
@@ -33,11 +34,20 @@ class AwesomeProject extends React.Component{
   }
 
   handleGoogleSignIn(){
-    console.log('handle google search has been called!')
+    console.log('handle google search has been called!');
+    this.setState({authWindowOpen: true});
   }
 
   render() {
-    return <Stack screenProps={{userdata: this.state.userData, handleGoogleSignIn: this.handleGoogleSignIn}}/>
+    if(this.state.authWindowOpen){
+      return (
+        <WebView
+          source={{uri: 'https://i.redd.it/ahaqcf64xd7z.jpg'}}
+          style={{marginTop: 20}}
+        />
+      );
+    }
+    return <Stack screenProps={{userdata: this.state.userData, handleGoogleSignIn: this.handleGoogleSignIn.bind(this)}}/>
   }
 }
 
