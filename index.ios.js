@@ -20,9 +20,6 @@ class AwesomeProject extends React.Component{
     this.state = {
       userData: {}
     };
-
-
-
   }
 
   componentDidMount() {
@@ -35,9 +32,12 @@ class AwesomeProject extends React.Component{
     .catch(err => console.log(err));
   }
 
+  handleGoogleSignIn(){
+    console.log('handle google search has been called!')
+  }
+
   render() {
-    // console.log(this.state.userData)
-    return <Stack screenProps={this.state.userData}/>
+    return <Stack screenProps={{userdata: this.state.userData, handleGoogleSignIn: this.handleGoogleSignIn}}/>
   }
 }
 
