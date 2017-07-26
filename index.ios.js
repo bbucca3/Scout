@@ -14,21 +14,18 @@ import PostView from './src/PostView.js';
 import SignIn from './src/SignIn.js';
 import Drawer from './src/DrawerNav.js';
 import HomeScreen from './HomeScreen.js';
+import geolib from 'geolib';
+
 var FAKE_SUBREDDIT_ID = 13;
 
 class AwesomeProject extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-<<<<<<< HEAD
-      userId: null,
-      userData: {},
-=======
       showToast: false,
       userId: null,
       userData: {},
       messages: [],
->>>>>>> 5844a15ccd897c2712375c4d9b50ca60741ccc59
       auth: {
         signUp: {
           username: '',
@@ -38,76 +35,23 @@ class AwesomeProject extends React.Component {
           username: '',
           password: ''
         }
-      }
+      },
+      notifications: [
+        {
+          latitude: 37.33662381,
+          longitude: -122.04159636, 
+        }, 
+        {
+          latitude: 37.3376803,
+          longitude: -122.03098862, 
+        }, 
+        {
+          latitude: 37.33662381,
+          longitude: -122.04159636, 
+        }
+      ]
     };
   }
-<<<<<<< HEAD
-
-  handleSignUpActions(type, text) {
-    if(type === 'username') {
-      this.setState((state)=>{
-        let newAuth = state.auth;
-        newAuth.signUp.username = text;
-        return {auth: newAuth}
-      })
-    }
-    if(type === 'password') {
-      this.setState((state)=>{
-        let newAuth = state.auth;
-        newAuth.signUp.password = text;
-        return {auth: newAuth}
-      })
-    }
-    if(type === 'submit') {
-      this.handleSignUpClick();
-    }
-  };
-
-  handleSignUpClick(){
-    fetch('http://localhost:3000/signup', {
-      method: 'POST', 
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: this.state.auth.signUp.username,
-        password: this.state.auth.signUp.password
-      })
-    })
-    .then(response => response.json())
-    .then(data => {
-      this.setState({userId: data.id}, ()=>{console.log('this is the state after set ', this.state)})
-    })
-    .catch(err => {
-      console.log(err);
-    })
-  }
-
-  handleSignInActions(type, text) {
-    if(type === 'username') {
-      this.setState((state)=>{
-        let newAuth = state.auth;
-        newAuth.signIn.username = text;
-        return {auth: newAuth}
-      })
-    }
-    if(type === 'password') {
-      this.setState((state)=>{
-        let newAuth = state.auth;
-        newAuth.signIn.password = text;
-        return {auth: newAuth}
-      })
-    }
-    if(type === 'submit') {
-      this.handleSignInClick();
-    }
-  };
-
-  handleSignInClick(){
-    fetch('http://localhost:3000/login', {
-      method: 'POST', 
-=======
 
   handleSignUpActions(type, text) {
     if(type === 'username') {
@@ -132,40 +76,24 @@ class AwesomeProject extends React.Component {
   handleSignUpClick(){
     fetch('http://localhost:3000/signup', {
       method: 'POST',
->>>>>>> 5844a15ccd897c2712375c4d9b50ca60741ccc59
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-<<<<<<< HEAD
-        email: this.state.auth.signIn.username,
-        password: this.state.auth.signIn.password
-=======
         email: this.state.auth.signUp.username,
         password: this.state.auth.signUp.password
->>>>>>> 5844a15ccd897c2712375c4d9b50ca60741ccc59
       })
     })
     .then(response => response.json())
     .then(data => {
-<<<<<<< HEAD
-      if(data.fail){
-        this.setState({userId: 'fail'})
-      } else {
-        this.setState({userId: data.id})
-      }
-=======
-      this.setState({userId: data.id}, ()=>{console.log('this is the state after set ', this.state)})
->>>>>>> 5844a15ccd897c2712375c4d9b50ca60741ccc59
+      this.setState({userId: data.id})
     })
     .catch(err => {
       console.log(err);
     })
   }
 
-<<<<<<< HEAD
-=======
   handleSignInActions(type, text) {
     if(type === 'username') {
       this.setState((state)=>{
@@ -218,7 +146,6 @@ class AwesomeProject extends React.Component {
     })
 
   };
->>>>>>> 5844a15ccd897c2712375c4d9b50ca60741ccc59
 
   componentDidMount() {
     fetch(`http://localhost:3000/api/user?id=13`)
@@ -229,32 +156,43 @@ class AwesomeProject extends React.Component {
     })
     .catch(err => console.log(err));
     this.fetchMessages();
+    this.geolocationChecker();
+  }
+
+  geolocationChecker() {
+    navigator.geolocation.watchPosition((coords)=>{
+      console.log(coords.coords)
+      let formattedCoords = {};
+      formattedCoords.latitude = coords.coords.latitude;
+      formattedCoords.longitude = coords.coords.longitude;
+      let nextCoords = {};
+      nextCoords.latitude = coords.coords.latitude - 300;
+      nextCoords.longitude = coords.coords.longitude - 300;
+      this.state.notifications.forEach((coords)=>{
+        console.log('these are cooords! ', coords);
+        
+      })
+      let isPointInCircle = geolib.isPointInCircle(formattedCoords, nextCoords, .2);
+      console.log('isPointInCircle ', isPointInCircle);
+    })
   }
 
   fetchMessages() {
-    console.log('is this happening after the post?');
     fetch(`http://localhost:3000/api/messages?subredditId=13`)
     .then(response => response.json())
     .then(data => {
       this.setState({messages: data});
-      console.log('data from fetch messages', this.state.messages);
     })
     .catch(err => console.log(err));
   }
 
   render() {
     return <Stack screenProps={{
-<<<<<<< HEAD
-      userdata: this.state.userData, 
-      handleSignUpActions: this.handleSignUpActions.bind(this),
-      handleSignInActions: this.handleSignInActions.bind(this)
-=======
       handleSignUpActions: this.handleSignUpActions.bind(this),
       handleSignInActions: this.handleSignInActions.bind(this),
       userData:this.state.userData,
       fetchMessages: this.fetchMessages.bind(this),
       messages:this.state.messages
->>>>>>> 5844a15ccd897c2712375c4d9b50ca60741ccc59
     }}/>
   }
 }
