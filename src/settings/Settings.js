@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, Button } from 'react-native';
-
+import { Dimensions, StyleSheet, Text, View, ScrollView, Button } from 'react-native';
 import Accordion from 'react-native-collapsible/Accordion';
 
 import UserSettings from './UserSettings.js';
 import AdminSettings from './AdminSettings.js';
 
+var { height, width } = Dimensions.get('window');
 
 export default class Settings extends React.Component {
   static navigationOptions = {
@@ -23,7 +23,7 @@ export default class Settings extends React.Component {
   renderAdminSettings(section) {
     return (
       <View>
-      <AdminSettings />
+        <AdminSettings />
       </View>
     );
   }
@@ -41,20 +41,22 @@ export default class Settings extends React.Component {
     return (
       <ScrollView>
         <Text>Settings Screen</Text>
-
-        <Text>Admin Settings Panels</Text>
-        <Accordion
-          sections={['Section 1', 'Section 2', 'Section 3']}
-          renderHeader={this.renderHeader}
-          renderContent={this.renderAdminSettings}
-        />
-
-        <Text>User Settings Panels</Text>
-        <Accordion
-          sections={['Section 1', 'Section 2', 'Section 3']}
-          renderHeader={this.renderHeader}
-          renderContent={this.renderUserSettings}
-        />
+        <View style={styles.admin}>
+          <Text>Admin Settings Panels</Text>
+          <Accordion style={styles.accordion}
+            sections={['Section 1', 'Section 2', 'Section 3']}
+            renderHeader={this.renderHeader}
+            renderContent={this.renderAdminSettings}
+          />
+        </View>
+        <View style={styles.users}>
+          <Text>User Settings Panels</Text>
+          <Accordion
+            sections={['Section 1', 'Section 2', 'Section 3']}
+            renderHeader={this.renderHeader}
+            renderContent={this.renderUserSettings}
+          />
+        </View>
       </ScrollView>
     );
   }

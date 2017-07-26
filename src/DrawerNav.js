@@ -17,6 +17,7 @@ const getDrawerItem = navigation => (
     <NavBarItem
       iconName="bars"
       onPress={() => {
+        console.log('bars');
         // check if drawer is not open
         if (navigation.state.index === 0) {
           // open drawer
@@ -30,10 +31,11 @@ const getDrawerItem = navigation => (
     {navigation.state.index === 0 && <NavBarItem
       iconName="plus"
       onPress={() => {
+        console.log('plus being clicked');
         navigation.navigate('CreatePosts')
       }}
     />}
-    {navigation.state.index === 0 && <Switch style={styles.slider}/>}
+    {navigation.state.index === 0 && <Switch style={styles.slider} onPress={()=> console.log('snooze clicked')}/>}
   </View>
 );
 
