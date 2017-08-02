@@ -15,11 +15,19 @@ class Notifications {
     }
   }
 
-  fetchNotifications(userid, geolocation){
-    //do a get request to the server
+  fetchNotifications(userid){
+    console.log('fetch notifications is firing!')
+    fetch(`http://localhost:3000/api/notifications?userId=${userid}`)
+    .then(res => res.json())
+    .then(data => {
+      console.log('heres the data we get from fetch notifcs ' ,data);
+      this.notifications.push(data);
+    })
+    .catch(err => console.log('this is the err!! in fetch notifics ', err));
   }
 
-  intervalFetchNotifications(milliseconds){
+  intervalFetchNotifications(userid, milliseconds){
+    setInterval(()=>{console.log('this is firing')}, 2000)
   }
 
   activateNotifications(){

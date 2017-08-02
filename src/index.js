@@ -6,6 +6,7 @@ import TestScreen from './components/TestScreen.js';
 import { AppNavigator } from './Navigators.js';
 import { appReducer, initialState } from './reducer';
 import PushNotification from 'react-native-push-notification';
+import notifications from './components/Notifications.js'
 
 const TEMP_USER_ID = 1;
 
@@ -16,6 +17,9 @@ class App extends React.Component {
     this.getPermissionForNotifications();
     navigator.geolocation.requestAuthorization();
     this.testPush();
+    // notifications.fetchNotifications(1, 180000);
+    notifications.intervalFetchNotifications(1, 2000);
+    // notifications.activateNotifications();
   }
 
   fetchUserData() {
