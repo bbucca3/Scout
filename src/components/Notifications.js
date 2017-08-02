@@ -1,11 +1,10 @@
 import geolib from 'geolib';
 
-
 class Notifications {
   constructor() {
     this.notifications = [];
     this.notificationsToBeFired = [];
-    this.distanceValuesToMeters = {
+    this.DistanceThresholdsToMeters = {
       1: 30,
       2: 152,
       3: 609,
