@@ -17,9 +17,10 @@ class App extends React.Component {
     this.getPermissionForNotifications();
     navigator.geolocation.requestAuthorization();
     this.testPush();
-    // notifications.fetchNotifications(1, 180000);
-    notifications.intervalFetchNotifications(1, 2000);
-    // notifications.activateNotifications();
+    notifications.fetchNotifications(1);
+    setTimeout(()=>{notifications.activateNotifications()}, 3000)
+    // notifications.intervalFetchNotifications(1, 2000);
+
   }
 
   fetchUserData() {
