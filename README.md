@@ -2,6 +2,8 @@
 
 IOS Application to notify users of interesting geolocations in their city.
 
+![alt text](https://media.licdn.com/media-proxy/ext?w=800&h=800&f=n&hash=dssrjOTOSTQHsYsQFmeheuD3vXI%3D&ora=1%2CaFBCTXdkRmpGL2lvQUFBPQ%2CxAVta9Er0Vinkhwfjw8177yE41y87UNCVordEGXyD3u0qYrdfyTuLc-OLLX0uQkTfi0clAVjePKhFjPoD8e4eYPteY0i2pTgco24ZxUBbFImi24)
+
 ## Team
 
 - Benjamin Bucca
